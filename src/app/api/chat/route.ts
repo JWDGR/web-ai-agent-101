@@ -6,10 +6,8 @@ const codeSnippets = [
   '<strong>i am strong</strong>'
 ];
 
-export async function POST(request: Request) {
+export async function POST() {
   try {
-    const body = await request.json();
-    
     // Get a random code snippet
     const randomSnippet = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
     
