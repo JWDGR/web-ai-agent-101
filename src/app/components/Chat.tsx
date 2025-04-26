@@ -18,11 +18,8 @@ export function Chat() {
   return (
     <div className="flex flex-col h-[600px] w-full max-w-2xl mx-auto p-4">
       <div className="flex-1 overflow-y-auto mb-4 space-y-4">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800"
-          >
+        {messages.map(message => (
+          <div key={message.id} className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800">
             <div dangerouslySetInnerHTML={{ __html: message.content }} />
             <div className="text-xs text-gray-500 mt-2">
               {new Date(message.timestamp).toLocaleTimeString()}
@@ -34,7 +31,7 @@ export function Chat() {
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={e => setInput(e.target.value)}
           placeholder="Type your message..."
           className="flex-1 p-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700"
           disabled={isLoading}
@@ -49,4 +46,4 @@ export function Chat() {
       </form>
     </div>
   );
-} 
+}

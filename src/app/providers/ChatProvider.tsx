@@ -11,7 +11,7 @@ interface ChatContextType {
 
 export const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 export function ChatProvider({ children }: { children: React.ReactNode }) {
   const { data: messages = [], mutate, isValidating } = useSWR('/api/messages', fetcher);
@@ -27,13 +27,19 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       });
 
       const data = await response.json();
-      
+
       // Update the messages using SWR's mutate
-      await mutate([...messages, {
-        id: Date.now().toString(),
-        content: data.message,
-        timestamp: data.timestamp,
-      }], false);
+      await mutate(
+        [
+          ...messages,
+          {
+            id: Date.now().toString(),
+            content: data.message,
+            timestamp: data.timestamp,
+          },
+        ],
+        false
+      );
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -44,4 +50,4 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       {children}
     </ChatContext.Provider>
   );
-} 
+}
