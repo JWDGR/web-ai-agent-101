@@ -7,16 +7,16 @@ import Preview from '../components/Preview';
 
 export default function DevelopPage() {
   return (
-    <ResizablePanelGroup direction="horizontal">
-      <ResizablePanel>
-        <ChatProvider>
+    <ChatProvider>
+      <ResizablePanelGroup direction="horizontal">
+        <ResizablePanel defaultSize={40}>
           <Chat />
-        </ChatProvider>
-      </ResizablePanel>
-      <ResizableHandle />
-      <ResizablePanel>
-        <Preview />
-      </ResizablePanel>
-    </ResizablePanelGroup>
+        </ResizablePanel>
+        <ResizableHandle />
+        <ResizablePanel defaultSize={60}>
+          <Preview />
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    </ChatProvider>
   );
 }
