@@ -1,10 +1,19 @@
 import Image from 'next/image';
+import { createClient } from '@/lib/supabase/server';
+import { LogoutForm } from '@/components/logout-form';
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl font-bold">WEB AI AGENT 101</h1>
+        <div className="flex justify-between items-center w-full">
+          <h1 className="text-4xl font-bold">WEB AI AGENT 101</h1>
+        </div>
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">Prompt and develop your own web site.</li>
           <li className="tracking-[-.01em]">Deploy and see your changes instantly.</li>
@@ -38,6 +47,7 @@ export default function Home() {
           <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
           Examples
         </a>
+        {session && <LogoutForm />}
       </footer>
     </div>
   );
